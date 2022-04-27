@@ -1,0 +1,85 @@
+* { 
+    padding: 0; 
+    margin: 0;
+    box-sizing: border-box;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
+html, 
+body {
+    min-height: 100vh;
+    background-color: black;
+    color:white;
+}
+
+main {
+    max-width: 320px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 10px;
+}
+
+h1 {
+    font-size: 30px;
+    color: #ddd;
+    margin: 30px 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+p {
+    margin: 10px 0;
+}
+
+.board {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 6px;
+    background-image: url('/images/bg_jogo_da_velha.png');
+}
+
+.board button {
+    border: 0;
+    background-color: transparent;
+    padding: 10px;
+    height: 96px;
+    width: 96px;
+    font-size: 58px;
+    outline: none;
+}
+
+.board button.cellX {
+    color: red
+}
+
+.board button.cellO {
+    color: blue
+}
+
+.register {
+    text-align: center;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.register input {
+    width: 300px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    text-align: center;
+}
+
+button .btn {
+    width: 350px;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(126, 7, 106);
+    color: white;
+    text-transform: uppercase;
+    margin-top: 10px;
+}

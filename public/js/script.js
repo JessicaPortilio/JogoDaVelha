@@ -20,6 +20,10 @@ const app = new Vue({
         renderTurnMessage(){
             this.message = this.myTurn ? "sua vez de jogar" : "Aguarde a vez do adversário";
         },
+
+        makeMove(cell){
+            console.log(cell);
+        }
     },
     mounted() {
         this.socket = io.connect(window.location.origin);
