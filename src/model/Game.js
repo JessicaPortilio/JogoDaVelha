@@ -1,4 +1,4 @@
-import Board from "./Board";
+import Board from "./Board.js";
 class Game {
     constructor(player1){
         this._player1 = player1;
@@ -39,4 +39,4 @@ class Game {
     }
 }
 
-export default Game
+export default Game;

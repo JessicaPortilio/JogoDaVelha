@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="eng">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -8,10 +8,23 @@
 </head>
 
 <body>
-    <h1>Jogo da Velha</h1>
-
-
+    <main>
+        <h1>Jogo da Velha</h1>
+        <div id="app">
+            <p v-if="game">
+                <strong>{{game._player1._name}}</strong>
+                Vs
+                <strong>{{game._player2._name}}</strong>
+            </p>
+            <p>{{message}}</p>
+            <div class="register" v-if="!game && !blockRegister">
+                <input type="text" v-model="playerName" placeholder="Entre com seu nome...">
+                <button @click="startGame()" class="btn">Jogar</button>
+            </div>
+        </div>
+</main>
     <script src="/vendor/socket.io-client/dist/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="./js/script.js"></script>
 </body>
 
