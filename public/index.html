@@ -21,10 +21,12 @@
 
             <div class="game" v-if="game">
                 <div class="board">
-                    <button v-for="cell in game._board._cells" @click="makeMove(cell)">
-                    {{cell.symbol}} 
-                </button>
+                    <button v-for="cell in game._board._cells" @click="makeMove(cell)"
+                        :class="{'cellX': cell.symbol == 'X', 'cellO': cell.symbol == 'O'}">
+                        {{cell.symbol}} 
+                    </button>
                 </div>
+                <button @click="resetGame()" class="btn" v-if="game._gameOver">Jogar Novamente</button>
             </div>
 
             <div class="register" v-if="!game && !blockRegister">

@@ -33,6 +33,12 @@ class Game {
         return this._gameOver;
     }
 
+    checkGameOver() {
+        const {gameOver, winner} = this._board.isGameOver();
+        this._gameOver = gameOver;
+        this._winner = winner;
+    }
+
     // Quando precisar mudar o turno X ou O
     changeTurn() {
         this._turnOf = this._turnOf == "X" ? "O" : "X";

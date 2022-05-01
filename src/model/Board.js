@@ -28,6 +28,43 @@ class Board {
         return this._cells;
     }
 
+    isGameOver() {
+        const matches = ["XXX", "OOO"]
+        const firstNull = this._cells.findIndex(cell => cell.Symbol == null); // celula vazia
+        if(firstNull == -1) {
+            return {gameOver : true , winner: null};
+        }
+
+        const winningConditions = [
+            // linha
+            this.cells[0].symbol + this.cells[1].symbol + this.cells[2].symbol,
+            this.cells[3].symbol + this.cells[4].symbol + this.cells[5].symbol,
+            this.cells[6].symbol + this.cells[7].symbol + this.cells[8].symbol,
+
+            // coluna
+            this.cells[0].symbol + this.cells[3].symbol + this.cells[6].symbol,
+            this.cells[1].symbol + this.cells[4].symbol + this.cells[7].symbol,
+            this.cells[2].symbol + this.cells[5].symbol + this.cells[8].symbol,
+
+            // diagonal
+            this.cells[0].symbol + this.cells[4].symbol + this.cells[8].symbol,
+            this.cells[6].symbol + this.cells[4].symbol + this.cells[2].symbol,
+        ]
+
+        const winningCondition = winningConditions.find(condition => {
+            return condition == matches[0] || condition == matches[1]
+        });
+
+        if(winningCondition) {
+            return {
+                gameOver: true,
+                winner: winningCondition == [0] ? 'X' : 'O',
+            }
+        }
+
+        return {gameOver: false, winner: null}; // o jogo ainda não terminou
+    }
+
     reset() {
         // pegar todas as posições e fazer um for pra zerar o tabuleiro
         this._cells.forEach((cell) => (cell.symbol = null));
