@@ -36,14 +36,45 @@ io.on("connection", (socket) => {
     socket.on("game.begin", function(data){ //trata o match entre dois jogadores verificando se os mesmos já conectaram simultaneamente
         const game = join(socket, data)
         if(game.player2){
-            console.log("Novo Jogo começando.", game);
+            console.log("Novo Jogo começando.");
             clients[game.player1.socketId].emit("game.begin", game);
             clients[game.player2.socketId].emit("game.begin", game);
         }
     });
 
+    socket.on("make.move", function(data){
+        const game = games[socket.id];
+        game._board.setCell(data.position, data.symbol);
+        game.checkGameOver();
+        game.changeTurn();
+         
+        const event = game.gameOver ? "gameover" : "move.made"; // muda a vez do jogador e depois recebe o game over
+        clients[game.player1.socketId].emit(event, game);
+        clients[game.player2.socketId].emit(event, game);
+    });
+
+    socket.on("game.reset", function(data){
+        const game = games[socket.id]
+        if(!game) return;
+        game.board.reset()
+        clients[game.player1.socketId].emit("game.begin", game);
+        clients[game.player2.socketId].emit("game.begin", game);
+    })
+
     socket.on("disconnect", function () { //verifica se o jogador saiu e o deleta 
-        console.log("Cliente desconectado. ID => " + id);
+        const game = games[socket.id];
+        if(game) { 
+            const socketEmit = game.player1.socketId == socket.id 
+                ? clients[game.player2.socketId]
+                : clients[game.player1.socketId];
+
+            if(socketEmit) {
+                socketEmit.emit("opponent.left");
+            }
+
+            delete games[socket.id]
+            delete games[socketEmit.id]
+        }
         delete clients[id];
     });
 });
