@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo da Velha</title>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
@@ -17,12 +18,21 @@
                 <strong>{{game._player2._name}}</strong>
             </p>
             <p>{{message}}</p>
+
+            <div class="game" v-if="game">
+                <div class="board">
+                    <button v-for="cell in game._board._cells" @click="makeMove(cell)">
+                    {{cell.symbol}} 
+                </button>
+                </div>
+            </div>
+
             <div class="register" v-if="!game && !blockRegister">
                 <input type="text" v-model="playerName" placeholder="Entre com seu nome...">
                 <button @click="startGame()" class="btn">Jogar</button>
             </div>
         </div>
-</main>
+    </main>
     <script src="/vendor/socket.io-client/dist/socket.io.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="./js/script.js"></script>

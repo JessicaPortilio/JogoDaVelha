@@ -33,7 +33,7 @@ io.on("connection", (socket) => {
     console.log("Novo cliente conectado. ID => " + id);
     clients[id] = socket;
 
-    socket.on("game.begin", function(data){
+    socket.on("game.begin", function(data){ //trata o match entre dois jogadores verificando se os mesmos já conectaram simultaneamente
         const game = join(socket, data)
         if(game.player2){
             console.log("Novo Jogo começando.", game);
@@ -42,13 +42,13 @@ io.on("connection", (socket) => {
         }
     });
 
-    socket.on("disconnect", function () {
+    socket.on("disconnect", function () { //verifica se o jogador saiu e o deleta 
         console.log("Cliente desconectado. ID => " + id);
         delete clients[id];
     });
 });
 
-const join = (socket, data) => {
+const join = (socket, data) => { //trata a comunicação entre os dois clients enviando que ambos estão conectados
     const player = new Player(data.playerName, 'X', socket.id);
     if(unmatched){
         unmatched.player2 = player;
