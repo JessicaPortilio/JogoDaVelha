@@ -1,38 +1,38 @@
 class Board {
     // ele vai controlar as 9 posições do jogo no tabuleiro
-    constructor(){
+    constructor() {
         this._cells = [
             // pra cada posição, vai poder armazenar um símbolo
-            {Symbol: null },
-            {Symbol: null },
-            {Symbol: null },
+            { symbol: null },
+            { symbol: null },
+            { symbol: null },
 
-            {Symbol: null },
-            {Symbol: null },
-            {Symbol: null },
+            { symbol: null },
+            { symbol: null },
+            { symbol: null },
 
-            {Symbol: null },
-            {Symbol: null },
-            {Symbol: null },
+            { symbol: null },
+            { symbol: null },
+            { symbol: null },
         ]
     }
-    getCell(index){
+    getCell(index) {
         return this._cells[index];
     }
 
-    setCell(index, symbol){
+    setCell(index, symbol) {
         this._cells[index].symbol = symbol;
     }
 
-    get cells () {
+    get cells() {
         return this._cells;
     }
 
     isGameOver() {
         const matches = ["XXX", "OOO"]
-        const firstNull = this._cells.findIndex(cell => cell.Symbol == null); // celula vazia
-        if(firstNull == -1) {
-            return {gameOver : true , winner: null};
+        const firstNull = this._cells.findIndex(cell => cell.symbol == null); // celula vazia
+        if (firstNull == -1) {
+            return { gameOver: true, winner: null };
         }
 
         const winningConditions = [
@@ -55,14 +55,14 @@ class Board {
             return condition == matches[0] || condition == matches[1]
         });
 
-        if(winningCondition) {
+        if (winningCondition) {
             return {
                 gameOver: true,
-                winner: winningCondition == [0] ? 'X' : 'O',
+                winner: winningCondition == matches[0] ? 'X' : 'O',
             }
         }
 
-        return {gameOver: false, winner: null}; // o jogo ainda não terminou
+        return { gameOver: false, winner: null }; // o jogo ainda não terminou
     }
 
     reset() {

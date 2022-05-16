@@ -17,14 +17,12 @@ const app = new Vue({
                 playerName: this.playerName,
             });
         },
-        renderTurnMessage(){
+        renderTurnMessage() {
             this.message = this.myTurn ? "Sua vez de jogar" : "Aguarde a vez do adversário";
         },
 
-        makeMove(cell){
-            console.log("myTurn: ", this.myTurn)
-            console.log("cell.symbol: ", cell.Symbol)
-            if(!this.myTurn || cell.Symbol !== null) return; // não é a vez do jogador ou já contém simbolo
+        makeMove(cell) {
+            if (!this.myTurn || cell.symbol !== null) return; // não é a vez do jogador ou já contém simbolo
             this.socket.emit("make.move", {
                 symbol: this.symbol,
                 position: this.game._board._cells.indexOf(cell),
@@ -40,7 +38,7 @@ const app = new Vue({
 
         const self = this;
 
-        this.socket.on("game.begin", function(data) {
+        this.socket.on("game.begin", function (data) {
             self.game = data;
             const myPlayer = data._player1._socketId == self.socket.id
                 ? data._player1
@@ -60,14 +58,15 @@ const app = new Vue({
         this.socket.on("gameover", function (data) {
             self.game = data;
             self.myTurn = false;
-            if(self.game._winner) {
-                self.message = self.game._winner == self.symbol ? "Você ganhou!" : "Você perdeu..."
+            if (self.game._winner) {
+                self.message =
+                    self.game._winner == self.symbol ? "Você ganhou!" : "Você perdeu...";
             } else {
                 self.message = "Jogo empatado";
             }
-        })
+        });
 
-        this.socket.on("opponent.left", function() {
+        this.socket.on("opponent.left", function () {
             self.game = null
             self.blockRegister = false
             self.message = "Seu adversário saiu do jogo";
