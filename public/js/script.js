@@ -58,6 +58,7 @@ const app = new Vue({
         this.socket.on("gameover", function (data) {
             self.game = data;
             self.myTurn = false;
+
             if (self.game._winner) {
                 self.message =
                     self.game._winner == self.symbol ? "Você ganhou!" : "Você perdeu...";
