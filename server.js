@@ -55,7 +55,7 @@ io.on("connection", (socket) => {
 
     socket.on("game.reset", function(data){
         const game = games[socket.id]
-        if(!game) return;
+        if(!game) return
         game.board.reset()
         clients[game.player1.socketId].emit("game.begin", game);
         clients[game.player2.socketId].emit("game.begin", game);
@@ -80,7 +80,7 @@ io.on("connection", (socket) => {
 });
 
 const join = (socket, data) => { //trata a comunicação entre os dois clients enviando que ambos estão conectados
-    const player = new Player(data.playerName, 'X', socket.id);
+    const player = new Player(data.playerName, "X", socket.id);
     if(unmatched){
         unmatched.player2 = player;
         games[unmatched.player1.socketId] = unmatched;
