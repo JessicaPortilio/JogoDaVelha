@@ -8,8 +8,13 @@
 html, 
 body {
     min-height: 100vh;
-    background-color: #c6e5d9;
+    /* background-color: #c6e5d9; */
     color:#393c3f;
+    background-image: url("/images/oldbck.png");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 main {
@@ -30,6 +35,19 @@ h1 {
 
 p {
     margin: 10px 0;
+}
+
+.playerName {
+    float: left;
+    padding-left: 10%;
+    max-width: 10ch;
+    overflow: hidden;
+    overflow: calc(70% - 0);
+}
+
+.qtdWinner {
+    float: right;
+    padding-right: 10%;
 }
 
 .ganhadores {
@@ -55,8 +73,8 @@ p {
 }
 
 .msg {
-    height: 5%;
-    padding: 10%;
+    height: 100px;
+    padding-top: 15%;
 }
 
 .board {
@@ -64,6 +82,7 @@ p {
     display: grid;
     grid-template-columns: auto auto auto;
     gap: 6px;
+    background-color: rgb(255, 255, 255, 0.7);
     background-image: url('/images/bg_jogo_da_velha.png');
 }
 
