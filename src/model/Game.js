@@ -9,6 +9,8 @@ class Game {
         this._winner = null;
         // de quem é a vez de começar
         this._turnOf = "X";
+        this.qtdWinner1 = 0;
+        this.qtdWinner2 = 0;
     }
 
     get player1(){
@@ -37,6 +39,12 @@ class Game {
         const {gameOver, winner} = this._board.isGameOver();
         this._gameOver = gameOver;
         this._winner = winner;
+        
+        // incrementa o placar
+        if(this._winner == "X")
+            this.qtdWinner1++
+        if(this._winner == "O")
+            this.qtdWinner2++
     }
 
     // Quando precisar mudar o turno X ou O
