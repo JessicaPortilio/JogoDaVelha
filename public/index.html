@@ -14,10 +14,24 @@
         <div id="app">
             <p v-if="game">
                 <strong>{{game._player1._name}}</strong>
-                Vs
+                contra
                 <strong>{{game._player2._name}}</strong>
             </p>
-            <p>{{message}}</p>
+
+            <div class="ganhadores" v-if="game">
+                <div class="g1">
+                    <p class="playerName">{{game._player1._name}}</p>
+                    <p class="qtdWinner">{{game.qtdWinner1}}</p>
+                </div>
+                <div class="g2">
+                    <p class="playerName">{{game._player2._name}}</p>
+                    <p class="qtdWinner">{{game.qtdWinner2}}</p>
+                </div>
+            </div>
+            
+            <div class="msg">
+                <p>{{message}}</p>
+            </div>
 
             <div class="game" v-if="game">
                 <div class="board">

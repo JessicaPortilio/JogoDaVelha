@@ -8,8 +8,13 @@
 html, 
 body {
     min-height: 100vh;
-    background-color: black;
-    color:white;
+    /* background-color: #c6e5d9; */
+    color:#393c3f;
+    background-image: url("/images/oldbck.png");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 main {
@@ -22,7 +27,7 @@ main {
 
 h1 {
     font-size: 30px;
-    color: #ddd;
+    color: #e94e77;
     margin: 30px 0;
     text-align: center;
     text-transform: uppercase;
@@ -32,11 +37,52 @@ p {
     margin: 10px 0;
 }
 
+.playerName {
+    float: left;
+    padding-left: 10%;
+    max-width: 10ch;
+    overflow: hidden;
+    overflow: calc(70% - 0);
+}
+
+.qtdWinner {
+    float: right;
+    padding-right: 10%;
+}
+
+.ganhadores {
+    background-color: #ff4e44;
+    border-color: #282634;
+
+}
+
+.g1 {
+    border: 1px solid #282634;
+    border-radius: 10px;
+    float: left;
+    width: 40%;
+    background-color: aliceblue;
+}
+
+.g2 {
+    border: 1px solid #282634;
+    border-radius: 10px;
+    float: right;
+    width: 40%;
+    background-color: aliceblue;
+}
+
+.msg {
+    height: 100px;
+    padding-top: 15%;
+}
+
 .board {
     width: 100%;
     display: grid;
     grid-template-columns: auto auto auto;
     gap: 6px;
+    background-color: rgb(255, 255, 255, 0.7);
     background-image: url('/images/bg_jogo_da_velha.png');
 }
 
@@ -51,11 +97,11 @@ p {
 }
 
 .board button.cellX {
-    color: red
+    color: #ff4e44
 }
 
 .board button.cellO {
-    color: blue
+    color: #282634
 }
 
 .register {
@@ -78,7 +124,7 @@ button.btn {
     padding: 5px;
     border-radius: 5px;
     border: none;
-    background-color: rgb(126, 7, 106);
+    background-color: #e94e77;
     color: white;
     text-transform: uppercase;
     margin-top: 10px;

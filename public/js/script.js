@@ -61,7 +61,8 @@ const app = new Vue({
 
             if (self.game._winner) {
                 self.message =
-                    self.game._winner == self.symbol ? "Você ganhou!" : "Você perdeu...";
+                    self.game._winner == self.symbol ? "VOCÊ GANHOU!!!" : "Você perdeu...";
+                    // self.game._winner == self.symbol ? self.qtdWinner1 = self.qtdWinner1++ : self.qtdWinner2 = self.qtdWinner2++
             } else {
                 self.message = "Jogo empatado";
             }

@@ -59,7 +59,7 @@ class Board {
         if (winningCondition) {
             return {
                 gameOver: true,
-                winner: winningCondition == matches[0] ? 'X' : 'O',   
+                winner: winningCondition == matches[0] ? 'X' : 'O',
             }
 
         }
