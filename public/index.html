@@ -29,7 +29,12 @@
                 </div>
             </div>
             
+            <!-- <div class="msg">
+                
+            </div> -->
+
             <div class="msg">
+                <p>{{classCode}}</p>
                 <p>{{message}}</p>
             </div>
 
@@ -44,8 +49,11 @@
             </div>
 
             <div class="register" v-if="!game && !blockRegister">
-                <input type="text" v-model="playerName" placeholder="Entre com seu nome...">
-                <button @click="startGame()" class="btn">Jogar</button>
+                <input type="text" v-model="playerName" placeholder="Entre com seu nome*">
+                <input type="text" v-model="codeClass" placeholder="Digite o código da sala (opcional)">
+                <button @click="startGame(codeClass)" class="btn">Jogar</button>
+                <!-- CRIAR SALA DE JOGO PRIVADO -->
+                <button @click="createClassGame()" class="btn">Criar Jogo Privado</button> 
             </div>
         </div>
     </main>

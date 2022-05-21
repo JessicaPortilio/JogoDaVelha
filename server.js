@@ -33,9 +33,22 @@ io.on("connection", (socket) => {
     console.log("Novo cliente conectado. ID => " + id);
     clients[id] = socket;
 
-    socket.on("game.begin", function(data){ //trata o match entre dois jogadores verificando se os mesmos já conectaram simultaneamente
+    socket.on("game.begin", function(data, codigo){ //trata o match entre dois jogadores verificando se os mesmos já conectaram simultaneamente
+        console.log("Estou no game.begin")
+        console.log("Data: ", data)
+        console.log("playerName: ", data.playerName)
+        console.log("cod: ", data.cod)
+        console.log("codigo: ", codigo)
+        
         const game = join(socket, data)
+        console.log(game.player1)
+        console.log(game.player2)
         if(game.player2){
+            // verifica se o jogador digitou um número de sala (válido)
+            console.log("socket: ", socket)
+            console.log("data: ", data)
+
+            // começa o jogo aleatoriamente
             console.log("Novo Jogo começando.");
             clients[game.player1.socketId].emit("game.begin", game);
             clients[game.player2.socketId].emit("game.begin", game);
@@ -81,13 +94,13 @@ io.on("connection", (socket) => {
 
 const join = (socket, data) => { //trata a comunicação entre os dois clients enviando que ambos estão conectados
     const player = new Player(data.playerName, "X", socket.id);
-    if(unmatched){
+    if(unmatched){ // cria o player2
         unmatched.player2 = player;
         games[unmatched.player1.socketId] = unmatched;
         games[unmatched.player2.socketId] = unmatched;
         unmatched = null;
         return games[socket.id];
-    }else {
+    }else { // cria o player1
         unmatched = new Game(player);
         return unmatched;
     }
