@@ -3,3 +3,4 @@ Projeto desenvolvido na disciplina de Sistema Distribuídos do departamento de S
 Foi um jogo de tabuleiro (Jogo da Velha) numa versão web. No qual utilizamos uma conexão web, usando WebSocket com a finalidade de possuir um canal de comunicação de baixa sobrecarga entre o servidor e o cliente.
 
 # Tela Inicial
+![TelaInicial](https://user-images.githubusercontent.com/47065396/170369056-488dd351-40d3-4a2d-917c-d92fd4dd99dd.png)
