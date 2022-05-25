@@ -14,8 +14,9 @@ const app = new Vue({
     methods: {
         startGame(codigo) {
             console.log("Entrei no start game")
-            console.log("codigo: ", codigo)
+            console.log("(recebendo o codigo) codigo: ", codigo)
             if(codigo == undefined) {
+                console.log("Entrei no undefined")
                 // procedimento de jogo normal, players jogam aleatoriamente entre si
                 this.message = "Aguardando adversario...";
                 this.blockRegister = true;
@@ -24,18 +25,21 @@ const app = new Vue({
                 //     playerName: this.playerName,
                 //     codigo: codigo,
                 // });
-                this.socket.emit("game.begin", this.playerName, codigo);
+                playerName = this.playerName
+                // this.socket.emit("game.begin", {playerName, codigo});
+                this.socket.emit("game.begin", {playerName, codigo});
             }
             else {
-                // if(codigo == this.classCode) {
-                if(codigo != undefined) {
-                    // entrar em uma sala privada com o codigo
-                    this.blockRegister = true;
-                    this.socket.emit("game.begin", {
-                        playerName: this.playerName,
-                        // verificar como vai ficar o nome do segundo jogador
-                    });
-                }
+                console.log("Entrei no else")
+                // entrar em uma sala privada com o codigo
+                this.blockRegister = true;
+                // this.socket.emit("game.begin", {
+                //     playerName: this.playerName,
+                //     // verificar como vai ficar o nome do segundo jogador
+                // });
+                playerName = this.playerName
+                // this.socket.emit("game.begin", {playerName, codigo});
+                this.socket.emit("game.begin", {playerName, codigo});
             }
 
             
@@ -48,6 +52,7 @@ const app = new Vue({
           // aguardar jogador que digite o codigo 
           this.message = "Aguardando adversario..."; 
           // chamar o startGame
+          console.log("(enviando o codigo) this.classCode: ", this.classCode)
           this.startGame(this.classCode)
         },
 
