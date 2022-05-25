@@ -1,22 +1,22 @@
-class Player {
-    constructor(name, symbol, socketId, codigo){
-        this._name = name;
-        this._symbol = symbol;
+class Jogador {
+    constructor(nome, simbolo, socketId, codigo){
+        this._nome = nome;
+        this._simbolo = simbolo;
         this._socketId = socketId;
         this._codigo = codigo;
     }
 
-    get name() {
-        return this._name;
+    get nome() {
+        return this._nome;
     }
 
-    get symbol() {
-        return this._symbol;
+    get simbolo() {
+        return this._simbolo;
     }
 
     // trocar o simbolo 
-    set symbol(symbol){
-        return this._symbol = symbol;
+    set simbolo(simbolo){
+        return this._simbolo = simbolo;
     }
 
     get socketId() {
@@ -33,4 +33,4 @@ class Player {
     }
 }
 
-export default Player;
+export default Jogador;

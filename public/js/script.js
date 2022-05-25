@@ -8,15 +8,40 @@ const app = new Vue({
         playerName: null,
         message: "",
         blockRegister: false,
+        classCode: null,
+        cod: null,
+        new: false, // para saber se é para criar uma nova sala
     },
     methods: {
-        startGame() {
-            this.message = "Aguardando adversario...";
-            this.blockRegister = true;
-            this.socket.emit("game.begin", {
-                playerName: this.playerName,
-            });
+        startGame(codigo, novo) {
+            if(codigo == undefined) {
+                // procedimento de jogo normal, players jogam aleatoriamente entre si
+                this.message = "Aguardando adversario...";
+                this.blockRegister = true;
+                playerName = this.playerName
+                this.socket.emit("game.begin", {playerName, codigo, novo});
+            }
+            else {
+                // entrar em uma sala privada com o codigo
+                this.blockRegister = true;
+                playerName = this.playerName
+                this.socket.emit("game.begin", {playerName, codigo, novo});
+            }
+
+            
         },
+
+        createClassGame() {
+          // gerar número aleatorio para a sala
+          this.classCode = Math.floor(Math.random() * 1001);
+          // colocar o número da sala
+          // aguardar jogador que digite o codigo 
+          this.message = "Aguardando adversario..."; 
+          this.new = true;
+          // chamar o startGame
+          this.startGame(this.classCode, this.new)
+        },
+
         renderTurnMessage() {
             this.message = this.myTurn ? "Sua vez de jogar" : "Aguarde a vez do adversário";
         },
@@ -62,7 +87,6 @@ const app = new Vue({
             if (self.game._winner) {
                 self.message =
                     self.game._winner == self.symbol ? "VOCÊ GANHOU!!!" : "Você perdeu...";
-                    // self.game._winner == self.symbol ? self.qtdWinner1 = self.qtdWinner1++ : self.qtdWinner2 = self.qtdWinner2++
             } else {
                 self.message = "Jogo empatado";
             }
