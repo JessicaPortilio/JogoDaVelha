@@ -1,8 +1,9 @@
 class Player {
-    constructor(name, symbol, socketId){
+    constructor(name, symbol, socketId, codigo){
         this._name = name;
         this._symbol = symbol;
         this._socketId = socketId;
+        this._codigo = codigo;
     }
 
     get name() {
@@ -20,6 +21,15 @@ class Player {
 
     get socketId() {
         return this._socketId;
+    }
+
+    get codigo() {
+        return this._codigo;
+    }
+
+    // inserir o codigo
+    set codigo(codigo){
+        return this._codigo = codigo;
     }
 }
 

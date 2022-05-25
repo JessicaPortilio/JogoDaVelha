@@ -31,31 +31,15 @@ let unmatchedPublic = null;
 // tratar a requisição do socket dentro do navegador
 io.on("connection", (socket) => {
     let id = socket.id
-    console.log("Novo cliente conectado. ID => " + id);
     clients[id] = socket;
 
-    socket.on("game.begin", function(data){ //trata o match entre dois jogadores verificando se os mesmos já conectaram simultaneamente
-        console.log("Estou no game.begin")
-        console.log("Data: ", data)
-        console.log("playerName: ", data.playerName)
-        console.log("cod: ", data.codigo)
-
-        // if(data.codigo == undefined) {
-        //     unmatchedPublic = null
-        // }
+    socket.on("game.begin", function(data){ // trata o match entre dois jogadores verificando se os mesmos já conectaram simultaneamente
         
         const game = join(socket, data)
-        console.log("After join")
-        console.log("data: ", data)
-        // console.log(game.player1)
-        // console.log(game.player2)
         if(game.player2){
             // verifica se o jogador digitou um número de sala (válido)
-            console.log("socket: ", socket)
-            console.log("data: ", data)
 
             // começa o jogo aleatoriamente
-            console.log("Novo Jogo começando.");
             clients[game.player1.socketId].emit("game.begin", game);
             clients[game.player2.socketId].emit("game.begin", game);
         }
@@ -99,13 +83,10 @@ io.on("connection", (socket) => {
 });
 
 const join = (socket, data) => { // trata a comunicação entre os dois clients enviando que ambos estão conectados
-    // para jogadas aleatorias
-    console.log("Entrei no join")
-    console.log("data: ", data)
+    // PUBLIC GAME
     if(data.codigo == undefined) {
-        console.log("estou no if, pra fazer uma jogada pública")
         
-        const player = new Player(data.playerName, "X", socket.id);
+        const player = new Player(data.playerName, "X", socket.id, data.codigo);
         
         if(unmatchedPublic){ // cria o player2
             unmatchedPublic.player2 = player;
@@ -118,30 +99,33 @@ const join = (socket, data) => { // trata a comunicação entre os dois clients 
             return unmatchedPublic;
         }
     }
-    // para jogadas privadas
-    else {
+    // PRIVATE GAME
+    else { // entro apenas quando tenho um código digitado
         // talvez fazer uma validação de codigo
-        console.log("estou no else, pra fazer uma jogada privada")
 
-        const player = new Player(data.playerName, "X", socket.id);
+        const player = new Player(data.playerName, "X", socket.id, data.codigo);
 
         if(unmatchedPrivate){ // cria o player2
-            unmatchedPrivate.player2 = player;
-            // console.log("unmatchedPrivate (if 'O'): ", unmatchedPrivate)
-            games[unmatchedPrivate.player1.socketId] = unmatchedPrivate;
-            games[unmatchedPrivate.player2.socketId] = unmatchedPrivate;
-            unmatchedPrivate = null;
-            return games[socket.id];
+            // if(unmatchedPrivate.player1.codigo == data.codigo) {
+                unmatchedPrivate.player2 = player;
+                games[unmatchedPrivate.player1.socketId] = unmatchedPrivate;
+                games[unmatchedPrivate.player2.socketId] = unmatchedPrivate;
+                unmatchedPrivate = null;
+                return games[socket.id];
+            // }
+            // else { 
+                // caso onde o codigo está errado e o player digita dnv, chamando a primeira tela
+
+                // caso onde o player quer criar uma nova sala (se o codSala não foi digitado mas gerado aleatoriamente)
+            //     if(data.novo) {
+            //         unmatchedPrivate = new Game(player);
+            //         return unmatchedPrivate;
+            //     }
+            // }
+            
         }else { // cria o player1
             unmatchedPrivate = new Game(player);
-            // console.log("unmatchedPrivate (else 'X'): ", unmatchedPrivate)
             return unmatchedPrivate;
         }
-
-        // unmatched.player2 = player;
-        // games[unmatched.player1.socketId] = unmatched;
-        // games[unmatched.player2.socketId] = unmatched;
-        // unmatched = null;
-        // return games[socket.id];
     }
 }

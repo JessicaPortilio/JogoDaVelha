@@ -50,7 +50,7 @@
 
             <div class="register" v-if="!game && !blockRegister">
                 <input type="text" v-model="playerName" placeholder="Entre com seu nome*">
-                <input type="text" v-model="codeClass" placeholder="Digite o código da sala (opcional)">
+                <input id="codSala" type="text" v-model="codeClass" placeholder="Digite o código da sala (opcional)">
                 <button @click="startGame(codeClass)" class="btn">Jogar</button>
                 <!-- CRIAR SALA DE JOGO PRIVADO -->
                 <button @click="createClassGame()" class="btn">Criar Jogo Privado</button> 
