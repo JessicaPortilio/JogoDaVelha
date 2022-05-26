@@ -2,6 +2,8 @@
 Projeto desenvolvido na disciplina de Sistemas Distribuídos do departamento de Sistemas de Informação da Universidade Federal de Sergipe no período 2021.2, coodernado pelo professor José Aélio de Oliveira Junior. 
 Esse projeto se trata do um jogo de tabuleiro Jogo da Velha numa versão WEB responsiva. No qual utilizamos uma conexão WEB, usando WebSocket com a finalidade de possuir um canal de comunicação de baixa sobrecarga entre o servidor e o cliente.
 
+Foram usadas as ferramentas: Node.js, socket.io, ejs, HTML, CSS e JavaScript.
+
 # Tela inicial
 ![TelaInicial](https://user-images.githubusercontent.com/47065396/170369056-488dd351-40d3-4a2d-917c-d92fd4dd99dd.png)
 
